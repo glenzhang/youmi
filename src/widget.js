@@ -1,5 +1,5 @@
 /**
-* widget
+* used to create ur own UI framework
 */
 
 ///<reference path="youmi.js" />
