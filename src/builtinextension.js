@@ -72,3 +72,14 @@ String.method("delCookie", function(domain, path) {
         (domain ? "; domain=" + domain : "") +
         (path ? "; path=" + path : "");
 });
+
+;(function() {
+    // debug
+    if (!window.console) {
+        console = {
+            log: function() {},
+            dir: function() {},
+            error: function() {}
+        };
+    }
+}());

@@ -9,7 +9,7 @@ var StringBuilder = new Youmi.Class();
 // var sb = new StringBuilder();
 // sb.append("hello").append(" ").append("world!").toString();
 // output "hello world!"
-StringBuilder.inculde({
+StringBuilder.include({
     init: function () {
         this.strings = [];
     },

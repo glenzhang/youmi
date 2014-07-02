@@ -1,5 +1,5 @@
 var Youmi = window.Youmi || {
-    namespace: function () {
+    namespace: function() {
         var a = arguments,
             o = null,
             i, j, d, rt;
@@ -9,11 +9,11 @@ var Youmi = window.Youmi || {
 
             if (typeof window[rt] == "undefined") {
                 window[rt] = {
-                    prop: function (k, v) {
+                    prop: function(k, v, c) {
                         if (!this[k]) {
                             this[k] = v;
                         }
-                        return this;
+                        return !c ? this : this[k];
                     }
                 };
             }
@@ -21,11 +21,12 @@ var Youmi = window.Youmi || {
             for (j = 1; j < d.length; ++j) {
                 o[d[j]] = o[d[j]] || {};
                 o = o[d[j]];
-                o.prop = function (k, v) {
+                o.prop = function(k, v, c) {
                     if (!this[k]) {
                         this[k] = v;
                     }
-                    return this;
+
+                    return !c ? this : this[k];
                 };
             }
         }
@@ -33,23 +34,23 @@ var Youmi = window.Youmi || {
         return o;
     },
 
-    Class: function (parent) {
-        var klass = function () {
+    Class: function(parent) {
+        var klass = function() {
             this.init.apply(this, arguments);
         };
 
         if (parent) {
-            var subclass = function () { };
+            var subclass = function() {};
             subclass.prototype = parent.prototype;
             klass.prototype = new subclass();
         }
 
-        klass.prototype.init = function () { };
+        klass.prototype.init = function() {};
         klass.fn = klass.prototype;
         klass.fn.parent = klass;
 
         // static method
-        klass.extend = function (obj) {
+        klass.extend = function(obj) {
             var extended = obj.extended;
             for (var i in obj) {
                 klass[i] = obj[i];
@@ -59,7 +60,7 @@ var Youmi = window.Youmi || {
         };
 
         // instance method
-        klass.include = function (obj) {
+        klass.include = function(obj) {
             var included = obj.included;
 
             for (var i in obj) {
@@ -69,10 +70,10 @@ var Youmi = window.Youmi || {
             if (included) included(klass);
         };
 
-        klass.proxy = function (func) {
+        klass.proxy = function(func) {
             var self = this;
 
-            return (function () {
+            return (function() {
                 return func.apply(self, arguments);
             });
         };
@@ -82,10 +83,10 @@ var Youmi = window.Youmi || {
         return klass;
     },
 
-    prop: function (k, v) {
+    prop: function(k, v, c) {
         if (!this[k]) {
             this[k] = v;
         }
-        return this;
+        return !c ? this : this[k];
     }
 };

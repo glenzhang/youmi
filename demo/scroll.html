@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Scroll</title>
+        <link rel="stylesheet" href="http://static2.51fanli.net/common/css/base.css">
+        <script src="../src/builtinextension.js"></script>
+        <script src="../src/youmi.js"></script>
+        <script src="../src/utility.js"></script>
+        <script src="../src/regs.js"></script>
+        <script src="../src/validation.js"></script>
+        <script src="../src/helper.js"></script>
+        <script src="../src/widget.js"></script>
+        <script src="../src/scrollpic.js"></script>
+        <style type="text/css">
+                /* 全局样式 */
+        body,ul,ol,li,p,h1,h2,h3,h4,h5,h6,form,fieldset,table,td,img,div{margin:0;padding:0;border:0;}
+        body{color:#333;font-size:12px;font-family:"SimSun","宋体","Arial Narrow";}
+        ul,ol{list-style-type:none;}
+        select,input,img,select{vertical-align:middle;}
+        a{text-decoration:none; outline: none; }
+        a:link{color:#024d91; outline: none;}
+        a:hover,a:active,a:focus{color:#2d79cf; text-decoration:underline}
+        a:visited{color:#677e93;}
+        .wrap { width:950px; margin:0 auto;}
+        .clearit{clear:both;}
+        .clearfix:after{content:".";display:block;height:0;visibility:hidden;clear:both;}
+        .clearfix{zoom:1;}
+        .noBack { background:none;}
+        .noBorder { border:none!important;}
+        /*字体*/
+        .f_wryh { font-family:"微软雅黑","宋体";}
+        .f_wryh a {color:#000;}
+        .f_wryh a:link{color:#000;}
+        .f_wryh a:hover { color:#0f97df;}
+        .f_wryh a:visited{color:#000;}
+        /*字体大小*/
+        .f_12 { font-size:12px; line-height:22px;}
+        .f_14 { font-size:14px; line-height:24px;}
+        .f_16 { font-size:16px;}
+        .f_18 { font-size:18px;font-family:"微软雅黑","宋体"; font-weight:normal; line-height:36px;}
+        /*字体颜色*/
+        .c_12 { color:#5c6a7e;}
+        /*链接颜色*/
+        a.link_fff:link,a.link_fff:visited{color:#fff!important;}/* 白色 */
+        a.link_fff:hover{color:#fff!important;}
+        a.link_5d5d5d:link,a.link_5d5d5d:visited{color:#5d5d5d!important;}/* 灰色 */
+        a.link_5d5d5d:hover{color:#0e97e1!important;}
+        a.link_12:link{color:#5c6a7e!important;}/* 12号及辅助字 */
+        a.link_12:visited{color:#8090a3!important;}/* 12号及辅助字 */
+        a.link_12:hover{color:#0f97df!important; text-decoration:underline;}
+        a.link_18:link{color:#024d91!important;}/* 白色 */
+        a.link_18:hover{color:#2d79cf!important;}
+        a.link_18:visited{ color:#024d91!important;}
+        a.linkRed:link,a.linkRed:visited{color:#f00!important;}/* 红色 */
+        a.linkRed:hover{color:#c00!important;}
+        a.linkBlack:link,a.linkBlack:visited{color:#000!important;}/* 黑色 */
+        a.linkRed01:link,a.linkRed01:visited{color:#f00;}
+        a.linkRed01:hover,a.linkRed01:active{color:#c00;}
+        li.linkRed02 a:link,li.linkRed02 a:visited{color:#f00;}
+        li.linkRed02 a:hover,li.linkRed02 a:active{color:#c00;}
+        /*定位*/
+        .m_left40 { margin-left:15px;}
+        /*顶部*/
+        .icon .icon1,.icon .icon2,.icon .icon3,.navMain a:hover,.navMain .title,.ZHSch-Btn ,.slide_dot span,.slide_dot2 span,.slide_dot7 span ,.tit03,.weibo-list-item .content,.sim_select h3,.tit01 h3 a, .tit04 h3 a,.navMain .titleKJ, .title_mobile,.tit01 .point,.tit01 .yb,.tit01 .cb,.list01 li,.list02 li, .listBtn li a{background:url(http://i1.sinaimg.cn/IT/deco/2013/1119/tech_zyc_images01_0626_v15.png) no-repeat;}
+        .top { height:31px;}
+        .topNav {height: 45px;margin-bottom: 10px;margin-top: 10px;overflow: hidden;width: 950px;}
+        .topNav .none { background:none; text-align:left; width:31px;}
+        .topNav .leftLineTop { border-left:1px solid #C5C5C6; margin-left:0px; background:none;overflow: hidden;width:36px; }
+        .topNav .leftLineBot {background: none ;border-left: 1px solid #C5C5C6;height: 17px;overflow: hidden;width:36px; }
+        .topNav .aL { text-align:left; background:none;}
+        .topNav ul { overflow:hidden;}
+        .topNav li {background: url("http://i0.sinaimg.cn/dy/deco/2009/0825/sinahome_0803_ws_002_new.gif") no-repeat scroll 0 -249px transparent;float: left;line-height: 14px;
+        text-align: center;width: 37px;height: 22px; margin:0px;}
+        .topNav li a { color:#646464;}
+        .topNav li a:link { color:#646464;}
+        .topNav li a:hover { color:#0e97e1; text-decoration:underline;}
+        .topNav li a:visited { color:#646464;}
+        .topNav .link_k a:link { color:#000;}
+        .topNav .link_k a:hover { color:#0e97e1; text-decoration:underline;}
+        .topNav .link_k a:visited { color:#000;}
+        .topNav ul {clear: both;height: 23px;}
+        /* .topNav li {background: url("http://i0.sinaimg.cn/dy/deco/2009/0825/sinahome_0803_ws_002_new.gif") no-repeat scroll 0 -250px transparent;float: left;line-height: 14px;margin-left: -1px;
+        padding: 0 1px;text-align: center;width: 35px;} */
+        .nav_1, .nav_2, .nav_3 {float: left;overflow: hidden;padding-top: 13px;}
+        .nav_1 {display: inline;margin-left: 1px;width: 72px; overflow:hidden;}
+        .nav_2 {display: inline;margin-left: 2px;width: 144px; overflow:hidden;}
+        .logo, .icon { float:left;}
+        .icon { padding:8px 0 0 11px;}
+        .icon .icon1,.icon .icon2,.icon .icon3,.icon .icon4 {float:left; padding:0 12px 0 25px; line-height:24px;background: url(http://i1.sinaimg.cn/book/deco/2012/0725/0724_news_zyc_iconsImage.png) no-repeat 0 0;}
+        .icon .icon1 { background-position:5px 3px; }
+        .icon .icon2 { background-position:5px -42px; }
+        .icon .icon3 { background-position:5px -89px; }
+        .icon .icon4 { background-position:5px -135px; }
+        .nav {background:url(http://i3.sinaimg.cn/IT/2012index/images/20120319_tech_zyc_back04.png) 0 -1px; repeat-x;position:relative;z-index:2;width:950px;margin:0 auto;}
+        .navMain a { float:left; padding:0 10px; text-decoration:none; line-height:44px;}
+        .navMain a:hover { background-position:-216px -40px; text-decoration:none; }
+        .navMain .title { background-position: -103px -96px ; width:94px; height:44px; padding:0; line-height:200px; overflow:hidden;}
+        .navMain .title:hover { background-position:0 -40px;}
+        .navMain .titleKJ { background-position: -103px -40px ; width:94px; height:44px; padding:0; line-height:200px; overflow:hidden;}
+        .navMain .titleKJ:hover { background-position:0 -96px;}
+        .navMain .title_mobile { background-position:  -516px -94px; width:94px; height:44px; padding:0; line-height:200px; overflow:hidden;}
+        .navMain .title_mobile:hover { background-position:-516px -38px;}
+        .navSub { float:left; padding:10px 0 0 4px;}
+        .navSub a{ float:left; padding:0 10px; border-right:1px solid #5c6a7e; line-height:14px;}
+        .navSub a { color:#024D91;}
+        .navSub a:link {color:#024D91;}
+        .navSub a:hover { color:#2d79cf;}
+        .navSub a:visited {color:##024D91;}
+        .navSDown { height:32px;}
+        /*搜索*/
+        .ZHSch{ float:right; padding-top:4px;padding-right:10px;}
+        .ZHSch .ZHSch-Ipt {background: #FFFFFF;border: 1px solid #afc5e0;color: #697a81;float: left;height: 13px;padding: 4px 6px 3px;width: 150px;}
+        .ZHSch .ZHSch-Btn {background-position: 0px -152px;border: 0 none;cursor: pointer;float: left;height: 22px;width: 59px; text-indent:-999em;}
+        .ZHSch .hover {background-position: -160px -152px;}
+        /*select*/
+        .s2 { width:95px;float:left; margin-right:8px; }
+        .sim_select{ position:relative; }
+        .sim_select h3{height:20px; background-color:#fff; background-position:95% -600px; font-size:12px; border:solid 1px #afc5e0; line-height:20px; padding-left:11px; cursor:pointer; color:#666; font-weight:normal;}
+        .sim_select ul{font-size:12px; border:solid 1px #afc5e0; border-top:0; position:absolute;z-index:99999999;}
+        .sim_select ul li{ line-height:24px; height:24px; padding:0 11px; background-color:#fff; cursor:pointer}
+        .sim_select ul li.noline{ background:#fff;}
+        .sim_select ul li.over{ background:#e2e4dd; color:#333}
+        /*横切定义*/
+        .part01 { margin-top:15px; background:url(http://i0.sinaimg.cn/IT/2012index/images/20120319_tech_zyc_back03_0326.png) repeat-y 2px 0;}
+        .part02, .part03 { background:url(http://i0.sinaimg.cn/IT/2012index/images/20120319_tech_zyc_back03_0326.png) repeat-y 2px 0;}
+        .left, .center, .right { float:left; overflow:hidden;}
+        .left { width:302px;}
+        .right{ width:250px;}
+        .center { width:360px; padding:0 19px;}
+        .blk01 { width:300px; }
+        .blk02 { margin-top:15px;}
+        .blk05 { padding:6px 0 2px;border-bottom: 1px dotted #B7CBE4; text-align:center;}
+        .blk05 p { text-align:center; padding-bottom:5px;}
+        .blk06 { margin-top:10px;}
+        .blk05 h1 a:link,.blk05 h1{font-size:18px!important;font-family:"微软雅黑","宋体"!important; font-weight:normal; line-height:36px;color:#024d91;}
+        .blk05 h1 a:hover{color:#2d79cf;}
+        .blk05 h1 a:visited{ color:#024d91;}
+        .blk05 p a{line-height:22px; font-size:12px;}
+        /*列表*/
+        .listBtn { padding:12px 0 0 5px;}
+        .listBtn li { float:left;}
+        .listBtn li a{ display:block; width:121px; height:42px; line-height:42px; text-align:center; background-position:-136px -504px; text-shadow:#edf2f4 0 1px 0px; letter-spacing:1px; color:#3a4a62;}
+        .listBtn li a:hover { background-position:0 -504px;text-shadow:#fbfdfd 0 1px 0px; color:#3a4a62; text-decoration:none;}
+        .listBtn li a:visited {color:#3a4a62; text-decoration:none;}
+        .list02 { padding:15px 0 0 7px;}
+        .list02 li,.list01 li { background-position: -947px -936px; padding-left:8px;}
+        .list03 { background:url(http://i1.sinaimg.cn/IT/deco/2013/1119/tech_zyc_images01_0626_v15.png) no-repeat -475px -278px; margin-top :4px;}
+        .list03 li { line-height:26px; padding-left:26px;}
+        .list01 {padding:12px 0;border-bottom: 1px dotted #B7CBE4;}
+        .list01 li a {font-size:14px; line-height:24px;}
+        .list02 li a:link{ font-size:12px; line-height:22px;color:#5c6a7e;}
+        .list02 li a:visited{color:#8090a3;}
+        .list02 li a:hover{color:#0f97df; text-decoration:underline;}
+        /*焦点图*/
+        .slide_box{ position:relative;zoom:1}
+        .slide{width: 300px;height: 250px; overflow:hidden; position:relative;border:1px solid #000;}
+        .slide .item,.slide7 .item{width: 300px;height: 250px;position:relative;  -webkit-transform:translate3d(0,0,0);/*for ipad*/}
+        .slide7 .item { width:290px; height:286px;}
+        .slide .item img{display: block;}
+        .slide .item .titleBack { position:absolute; top:218px; left:0;filter: Alpha(opacity=30); opacity:0.30; background-color:#000; height:32px; width:300px;}
+        .slide .item .title { position:absolute; top:218px; left:0;height:32px; width:300px; text-align:center; line-height:32px;}
+        .slide_btn{}
+        .slide_btn span{cursor: pointer; position:absolute ; top:111px;}
+        .slide_btn .btn_prevOn {background:url(http://i1.sinaimg.cn/IT/2012index/images/20120319_tech_zyc_arrowLeftOn.png) no-repeat; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=scale, src='http://i1.sinaimg.cn/IT/2012index/images/20120319_tech_zyc_arrowLeftOn.png');_background:none; width:29px; height:45px; text-indent:-999em;}
+        .slide_btn .btn_nextOn {background:url(http://i0.sinaimg.cn/IT/2012index/images/20120319_tech_zyc_arrowRightOn.png) no-repeat; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=scale, src='http://i0.sinaimg.cn/IT/2012index/images/20120319_tech_zyc_arrowRightOn.png');_background:none; width:29px; height:45px; text-indent:-999em; right:0px;}
+        .slide_btn .btn_prevOff {background:url(http://i3.sinaimg.cn/IT/2012index/images/20120319_tech_zyc_arrowLeftOff.png) no-repeat; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=scale, src='http://i3.sinaimg.cn/IT/2012index/images/20120319_tech_zyc_arrowLeftOff.png');_background:none; width:29px; height:45px; text-indent:-999em;}
+        .slide_btn .btn_nextOff {background:url(http://i2.sinaimg.cn/IT/2012index/images/20120319_tech_zyc_arrowRightOff.png) no-repeat; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=scale, src='http://i2.sinaimg.cn/IT/2012index/images/20120319_tech_zyc_arrowRightOff.png');_background:none; width:29px; height:45px; text-indent:-999em; right:0px;}
+        .slide_dot {margin: 6px 0;text-align: center;width: 300px;}
+        .slide_dot7 {margin: 6px 0;text-align: center;width: 290px;}
+        .slide_dot span,.slide_dot2 span,.slide_dot7 span{display: inline-block;vertical-align: middle;overflow: hidden;margin: 0 2px;cursor: pointer; background-position:-1px -188px;}
+        .slide_dot .dot_list,.slide_dot2 .dot_list,.slide_dot7 .dot_list{width: 18px;height: 18px;}
+        .slide_dot .current,.slide_dot2 .current,.slide_dot7 .current{ background-position:-21px -188px;}
+        .slide2{width: 300px; overflow:hidden;}
+        #slide3wrap_box,#slide2wrap_box,#slide4wrap_box{ height:134px;}
+        #slide_06wrap_box{ height:234px;}
+        .slide2 .item{}
+        .slide_btn2 .btn_prevOn2,.slide_btn2 .btn_prevOff2,.slide_btn2 .btn_nextOn2,.slide_btn2 .btn_nextOff2 { float:left; background:url(http://i1.sinaimg.cn/IT/deco/2013/1119/tech_zyc_images01_0626_v15.png) no-repeat; width:33px; height:33px; text-indent:-999em;cursor:pointer;}
+        .slide_btn2 { width:180px; margin:10px auto 0;}
+        .slide_dot2 {margin: 9px 10px 0 ;text-align: center; float:left; width:90px;}
+        .slide_btn2 .btn_prevOn2 { background-position:-64px -184px;}
+        .slide_btn2 .btn_nextOn2 { background-position:-112px -184px;}
+        .slide_btn2 .btn_prevOff2 { background-position:-160px -184px;}
+        .slide_btn2 .btn_nextOff2 { background-position:-208px -184px;}
+        /*图文*/
+        .picCont01 {overflow: hidden; width:300px;}
+        .picCont01 .pic {float: left;overflow: hidden;width: 120px;}
+        .picCont01 .Cont {line-height: 20px;margin-left: 120px;padding:0 14px 0 10px;width:153px; height:90px;overflow:hidden; *margin-left:117px;}
+        /*标题*/
+        .tit01 { border-bottom:2px solid #000; height:24px; overflow:hidden; line-height:22px;}
+        .tit01 h3 { height:23px; line-height:200px; overflow:hidden;  float:left;}
+        .tit01 h3 a { display:block; width:80px;}
+        .tit01 .bk { background-position:0 -661px; width:60px;}
+        .tit01 .gd { background-position:0 -696px;}
+        .tit01 .ccgs{background-position:-288px -695px;}
+        .tit01 .hlw { background-position:-80px -665px;}
+        .tit01 .gjdl { background-position:-62px -792px; width:73px; float:left;}
+        .tit01 .ts { background-position:0 -792px; width:38px; float:left;}
+        .tit01 .dx { background-position:-80px -696px; float:left; width:44px;}
+        .tit01 .four { background-position:-138px -696px; float:left; width:36px;}
+        .tit01 .sdyd { background-position:0 -760px;}
+        .tit01 .it { background-position:-88px -728px; width:66px; float:left;}
+        .tit01 .phb { background-position:0 -600px;}
+        .tit01 .sm { background-position:-88px -760px;}
+        .tit01 .jd { background-position:-170px -728px; float:left;}
+        .tit01 .point { background-position:-153px -728px; width:15px;  float:left;}
+        .tit04 .yb { background-position:-113px -442px; float:left; width:38px}
+        .tit04 .caib { background-position:-154px -442px; width:38px;  float:left;}
+        .tit04 .point { background-position:-155px -728px; width:17px;  float:left;}
+        .tit01 .bk:hover { background-position:-176px -661px; width:60px;}
+        .tit01 .gd:hover { background-position:-176px -696px;}
+        .tit01 .ccgs:hover{background-position:-383px -695px;}
+        .tit01 .hlw:hover { background-position:-387px -800px;}
+        .tit01 .gjdl:hover { background-position:-234px -792px;}
+        .tit01 .ts:hover { background-position:-172px -792px;}
+        .tit01 .dx:hover { background-position:-488px -800px;}
+        .tit01 .four:hover {background-position:-545px -800px;}
+        .tit01 .sdyd:hover { background-position:-174px -760px;}
+        .tit01 .it:hover { background-position:-384px -729px; }
+        .tit01 .phb:hover { background-position:-335px -600px;}
+        .tit01 .sm:hover { background-position:-389px -764px;}
+        .tit01 .jd:hover { background-position:-466px -729px; float:left;}
+        .tit04 .yb:hover { background-position:-249px -666px; float:left; width:38px}
+        .tit04 .caib:hover { background-position:-290px -666px; width:38px;  float:left;}
+        .tit02 { line-height:44px; }
+        .tit03 { background-position:0px -224px; height:36px; line-height:200px; overflow:hidden; display:block; padding-left:40px}
+        .tit03 a{background-position:-40px -224px; height:36px; line-height:200px; overflow:hidden; display:block; width:55px;}
+        .tit03 a:hover { background-position:-328px -224px; height:36px; line-height:200px; overflow:hidden; display:block;}
+        /*微博列表*/
+        .weibo-list { padding:11px 9px 0px; background-color:#fafbfd; height:404px; overflow:hidden;}
+        .weibo-list-item { height:210px; overflow:hidden;}
+        .weibo-list-item .content { background-position:0px -272px; width:210px; height:106px; padding: 15px 8px 0 13px;}
+        .weibo-list-item .face { width:55px; height:55px; border:1px solid #d7e0e7; padding:5px; float:left;}
+        .weibo-list-item .Cont { width:145px; padding-top:10px; float:right;}
+        .male, .female, .approve, .approve_co, .approve_dead, .ico_club, .ico_twoyear, .ico_fashion, .ico_gives, .ico_number_gold, .ico_number_silver, .ico_number_bronze, .ico_vlady, .ico_draegg, .ico_dragon, .ico_wbnight_cup {background: url("http://img.t.sinajs.cn/t4/style/images/common/ico_user.png") no-repeat scroll 0 50% transparent;display: inline-block;}
+        .male {background-position: 0 -75px;height: 13px;margin: 0 2px;width: 11px;}
+        .female {background-position: 0 -100px;height: 13px;margin: 0 2px;width: 11px;}
+        .approve {background-position: 0 -125px;height: 12px;vertical-align: -1px;width: 14px;}
+        .approve_co {background-position: 0 -150px;height: 12px;vertical-align: -1px;width: 14px;}
+        .approve_dead {background-position: 0 -250px;height: 12px;vertical-align: -1px;width: 14px;}
+        #ghc1 table{background:none!important;}
+        #ghc1{line-height:29px!important;}
+        a.videoNews{background:url(http://i0.sinaimg.cn/dy/deco/2007/1211/yocc/unfcn_mj_01.gif) no-repeat 100% 50%; padding-right:20px;}/* 视频图标链接 */
+        a.videoNewsLeft{background:url(http://i0.sinaimg.cn/dy/deco/2007/1211/yocc/unfcn_mj_01.gif) no-repeat -19982px 50%; padding-left:20px;}/* 视频图标链接（左图标） */
+        a.liveNewsLeft{background:url(http://i2.sinaimg.cn/video/deco/2010/0525/liveNewsLeft.gif) no-repeat 0px 50%; padding-left:22px;}
+        a.videoNewsNew{background:url(http://i1.sinaimg.cn/video/deco/2010/0527/new.png) no-repeat 0px 50%; padding-left:28px;}
+        .table-stock .t_r{text-align:right; padding-right:10px;}
+        .slide_btn2 .btn_prevOn3,.slide_btn2 .btn_prevOff3,.slide_btn2 .btn_nextOn3,.slide_btn2 .btn_nextOff3 { float:left; background:url(http://i1.sinaimg.cn/IT/deco/2013/1119/tech_zyc_images01_0626_v15.png) no-repeat; width:33px; height:33px; text-indent:-999em;cursor:pointer;}
+        .slide_btn2 .btn_prevOn3 { background-position:-600px -184px;}
+        .slide_btn2 .btn_nextOn3 { background-position:-648px -184px;}
+        .slide_btn2 .btn_prevOff3 { background-position:-435px -184px;}
+        .slide_btn2 .btn_nextOff3 { background-position:-543px -184px;}
+        .slide_dot3 {margin: 9px 10px 0 ;text-align: center; float:left; width:90px;}
+        .slide_dot3 span{display: inline-block;vertical-align: middle;overflow: hidden;margin: 0 2px;cursor: pointer;background:url(http://i1.sinaimg.cn/IT/deco/2013/1119/tech_zyc_images01_0626_v15.png)  -502px -188px no-repeat;}
+        .slide_dot3 .dot_list{width: 18px;height: 18px;}
+        .slide_dot3 .current{ background-position:-479px -188px;}
+        .blk18 { margin-top:15px;}
+        /* .blk18 .content { height:200px;} */
+        .blk18 .pic { text-align:center; padding-top:   15px;}
+        .blk18 .title { line-height:36px; text-align:center;}
+        .blk18 .list02 { padding-top:10px;}
+        .blk18 .picCont02 {position:relative;}
+        .picCont02 .image { padding-top:15px; padding-left:10px; }
+        .picCont02 .txt { width:230px; position: absolute; bottom: 0px; left: 11px; width: 230px;  font-family: '微软雅黑'; line-height: 32px; text-align:center;}
+        .picCont02 h4 a{  font-size: 16px;; font-weight:normal;color: #fff;}
+        .picCont02 .txtBack {position: absolute; bottom: 0px; background: #000; left: 10px; width: 230px; opacity: 0.3; height: 32px; filter: Alpha(opacity=30);}
+        .picCont02 .txt p { line-height:22px; color:#5C6A7E;}
+        .blk19 .tabBtn span  { height:34px; font-size:18px; font-family:'微软雅黑','黑体'; width:93px; line-height:200px; text-align:center; float:left; overflow:hidden;}
+        .blk19 .tabBtn { background:url(http://i1.sinaimg.cn/IT/deco/2013/1119/tech_zyc_images01_0626_v15.png) -369px -1000px no-repeat; height:41px; width:299px;}
+        .blk19 .tabBtn .selected {background:url(http://i1.sinaimg.cn/IT/deco/2013/1119/tech_zyc_images01_0626_v15.png) -369px -1064px no-repeat; height:41px; width:93px;}
+        .blk19 .tabBtn h3 a{ float:left; display:inline; width:71px; margin-right:20px; height:41px; cursor:pointer; overflow:hidden; line-height:299px;}
+        .blk19 .content{ position:relative;}
+        .blk19 .content span.aline{ position:absolute; display:block; width:1px; height:90px; overflow:hidden; font-size:0px; line-height:0px; background:#ccc; left:142px; top:0px;}
+        .part02 .list01 a { line-height:25px;}
+        .blk19 .tabBtn h3 a:hover { background:url(http://i1.sinaimg.cn/IT/deco/2013/1119/tech_zyc_images01_0626_v15.png) -663px -1351px no-repeat;}
+        .tit01 .jdrw { background-position:-592px -728px;}
+        .tit01 .jdrw:hover { background-position:-720px -728px;}
+        .tit04 .wayy { background-position:-817px -728px;}
+        .tit04 .wayy:hover { background-position:-817px -768px;}
+        .tit04 .dsgc { background-position:-720px -800px;}
+        .tit04 .dsgc:hover { background-position:-817px -800px;}
+        .weibo-list { padding:11px 9px 0px; background-color:#fafbfd; height:202px; overflow:hidden;}
+        .tit03 { background-position:-280px -1208px; height:36px; line-height:200px; overflow:hidden; display:block; padding-left:40px}
+        .blk02 { margin-top:0px;}
+        .listBtn { padding:0 0 10px 5px;}
+        #slide9 { width:250px;}
+        #slide9 h4 { padding-left:10px;}
+        #slide9 .picCont01 { width:240px; padding-left:10px;}
+        #slide9 .picCont01 .pic { width:110px;}
+        #slide9 .picCont01 .Cont {height: 80px;line-height: 20px;margin-left: 110px;overflow: hidden;padding: 0 10px 0 10px;width: 105px;}
+        .tit04 .ztch { background-position:-776px -1362px;width:88px;}
+        .tit04 .ztch:hover { background-position:-864px -1362px;}
+        .tit01 .pgh{background-position:-785px -1395px;}
+        .tit01 .pgh:hover{background-position:-873px -1395px;}
+        .tit04 .csj { background-position:-786px -1473px;width:88px;}
+        .tit04 .csj:hover { background-position:-874px -1473px;}
+        </style>
+    </head>
+    <body>
+        <div class="blk01" data-sudaclick="blog_show" blkclick="auto_nav" blktitle="博客">
+            <div class="tit01">
+                <h3><a  class="bk" href="http://blog.sina.com.cn/lm/tech/" target="_blank">博客</a></h3>
+            </div>
+            <div class="slide_box">
+                <div class="slide2" id="slide2">
+                    <div class="item">
+                        <h4 class="tit02 f_14 f_wryh"><a target="_blank" href="http://blog.sina.com.cn/s/blog_54aec7cb0101mijd.html?tj=tech">王冠雄：高德财报争议 转型互联网的样本</a></h4>
+                        <div class="picCont01">
+                            <div class="pic">
+                                <a target="_blank" href="http://blog.sina.com.cn/s/blog_54aec7cb0101mijd.html?tj=tech">
+                                <img width="120" border="0" height="90" src="http://i3.sinaimg.cn/IT/752/2013/1126/U9470P2T752D3721F25213DT20131126092039.jpg" alt="王冠雄：高德财报争议 转型互联网的样本" title="王冠雄：高德财报争议 转型互联网的样本">
+                                </a>
+                            </div>
+                            <div class="Cont">
+                                <p class="c_12">一份财报，如此争议。高德到底是转型互联网失败，还是已经初现曙光？ <a class="link_12" href="http://blog.sina.com.cn/s/blog_54aec7cb0101mijd.html?tj=tech" target="_blank">[详细]</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <h4 class="tit02 f_14 f_wryh"><a target="_blank" href="http://blog.sina.com.cn/s/blog_58270b4b0102e7f9.html?tj=tech">米晓彬：小米为啥要做路由器？</a></h4>
+                        <div class="picCont01">
+                            <div class="pic">
+                                <a target="_blank" href="http://blog.sina.com.cn/s/blog_58270b4b0102e7f9.html?tj=tech">
+                                <img width="120" border="0" height="90" src="http://i0.sinaimg.cn/IT/752/2013/1126/U9470P2T752D3720F25213DT20131126091829.jpg" alt="米晓彬：小米为啥要做路由器？" title="米晓彬：小米为啥要做路由器？">
+                                </a>
+                            </div>
+                            <div class="Cont">
+                                <p class="c_12">为什么当360推出随身wifi后，一贯以低价高性能标榜的小米，做出了一款799元的路由器？ <a class="link_12" href="http://blog.sina.com.cn/s/blog_58270b4b0102e7f9.html?tj=tech" target="_blank">[详细]</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <h4 class="tit02 f_14 f_wryh"><a target="_blank" href="http://blog.sina.com.cn/s/blog_670d772d0101cl3t.html?tj=tech">顾文军:紫光收购展讯和锐迪科对IC业的影响</a></h4>
+                        <div class="picCont01">
+                            <div class="pic">
+                                <a target="_blank" href="http://blog.sina.com.cn/s/blog_670d772d0101cl3t.html?tj=tech">
+                                <img width="120" border="0" height="90" src="http://i3.sinaimg.cn/IT/752/2013/1125/U9470P2T752D3713F25213DT20131125103705.jpg" alt="顾文军:紫光收购展讯和锐迪科对IC业的影响" title="顾文军:紫光收购展讯和锐迪科对IC业的影响">
+                                </a>
+                            </div>
+                            <div class="Cont">
+                                <p class="c_12">紫光收购展讯和锐迪科是中国IC产业大变革中的里程碑事件,它将倒逼IC和手机业加速整合。 <a class="link_12" href="http://blog.sina.com.cn/s/blog_670d772d0101cl3t.html?tj=tech" target="_blank">[详细]</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <h4 class="tit02 f_14 f_wryh"><a target="_blank" href="http://blog.sina.com.cn/s/blog_46fffa790101e4mz.html?tj=tech">海达郝：强推4K电视能解厂商盈利之困吗？</a></h4>
+                        <div class="picCont01">
+                            <div class="pic">
+                                <a target="_blank" href="http://blog.sina.com.cn/s/blog_46fffa790101e4mz.html?tj=tech">
+                                <img width="120" border="0" height="90" src="http://i0.sinaimg.cn/IT/752/2013/1125/U10168P2T752D3712F25213DT20131125100113.jpg" alt="海达郝：强推4K电视能解厂商盈利之困吗？" title="海达郝：强推4K电视能解厂商盈利之困吗？">
+                                </a>
+                            </div>
+                            <div class="Cont">
+                                <p class="c_12">高清还没开始，4K就来了。很明显4K的电视机现在并不适应看电视的需求，重点在“盈利”两个字。 <a class="link_12" href="http://blog.sina.com.cn/s/blog_46fffa790101e4mz.html?tj=tech" target="_blank">[详细]</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide_btn2 clearfix">
+                    <span id="btn_prev2" class="btn_prevOff2" onmouseover="this.className='btn_prevOn2'" onmouseout="this.className='btn_prevOff2'">上一个</span>
+                    <div class="slide_dot2 clearfix" id="slide_dot2"></div>
+                    <span id="btn_next2" class="btn_nextOff2" onmouseover="this.className='btn_nextOn2'" onmouseout="this.className='btn_nextOff2'">下一个</span>
+                </div>
+            </div>
+        </div>
+        <script>
+                        var slide_02 = new Youmi.UI.ScrollPic();
+                        slide_02.id = 'slide2';//容器ID为必选参数
+                        slide_02.prevId = 'btn_prev2';//按钮ID (上一个)
+                        slide_02.nextId = 'btn_next2';//按钮ID (下一个)
+                        //以下皆是可选参数
+                        slide_02.moveNum = 1;//每次滚动几个单元格 [默认1个]
+                        slide_02.isLoop = true;//无缝循环滚动 [默认是]
+                        //  slide_01.speed = 20;//速度 越小越快 [默认20]
+                        slide_02.autoPlay = false;
+                        slide_02.playTime = 2000;//自动播放时间间隔 [默认5秒]
+                        slide_02.dotId = 'slide_dot2';//点列表容器ID [默认没点]
+                        slide_02.dotEvent = 'mouseover';//点切换事件 [默认click]
+                        //slide_01.dotType='number';//点类型 可以是数字或HTML代码 [默认空]
+                        slide_02.dotClass = 'dot_list';//点className [默认dot_list]
+                        slide_02.dotClassOn = 'current';//当前点 className [默认current]
+                        slide_02.vertical = false;
+                        slide_02.setup();
+        </script>
+    </body>
+</html>
