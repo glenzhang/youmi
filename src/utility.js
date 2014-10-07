@@ -34,11 +34,16 @@ Youmi.prop("Utility", (function () {
         return value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     }
 
+    function _strLength(str) {
+      return str.replace(/[^\x00-\xff]/gi, 'xx').length;
+    }
+
     return {
         random: _random,
         guid: _guid,
         escapeRegExp: _escapeRegExp,
         escapeHTML: _escapeHTML,
+        strLength: _strLength,
         prop: Youmi.prop
     };
 
