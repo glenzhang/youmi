@@ -40,7 +40,7 @@ Youmi.UI.define("ScrollPic", {
     setup: function() {
         if (!this.id) {
             throw new Error("必须指定滚动的容器Id.");
-            return
+            return;
         }
         this.o = this.$(this.id);
         this.o.style.overflow = 'hidden';
@@ -53,7 +53,7 @@ Youmi.UI.define("ScrollPic", {
                 this.num++;
                 items.push(lists[i]);
                 if (!this.vertical) {
-                    this.isIE ? lists[i].style.styleFloat = 'left' : lists[i].style.cssFloat = 'left'
+                    this.isIE ? lists[i].style.styleFloat = 'left' : lists[i].style.cssFloat = 'left';
                 }
             }
         }
@@ -62,11 +62,11 @@ Youmi.UI.define("ScrollPic", {
         if (this.vertical) {
             var width = parseInt(this.getStyle(items[0], 'marginTop')) + parseInt(this.getStyle(items[0], 'marginBottom'));
             width = width ? width : 0;
-            width += items[0].offsetHeight
+            width += items[0].offsetHeight;
         } else {
             var width = parseInt(this.getStyle(items[0], 'marginLeft')) + parseInt(this.getStyle(items[0], 'marginRight'));
             width = width ? width : 0;
-            width += items[0].offsetWidth
+            width += items[0].offsetWidth;
         }
         this.width = this.moveNum * width;
         if (this.o.clientWidth > this.width * this.num) return;
@@ -75,7 +75,7 @@ Youmi.UI.define("ScrollPic", {
         var dom = '',
             ctn = this.o.innerHTML;
         if (this.isLoop) {
-            dom = '<div style="' + (this.vertical ? 'height' : 'width') + ':30000px;zoom:1;" id="' + this.id + 'wrap_box">  <div style="float:left;zoom:1;">' + ctn + '</div>   <div style="float:left;zoom:1;">' + ctn + '</div></div>'
+            dom = '<div style="' + (this.vertical ? 'height' : 'width') + ':30000px;zoom:1;" id="' + this.id + 'wrap_box">  <div style="float:left;zoom:1;">' + ctn + '</div>   <div style="float:left;zoom:1;">' + ctn + '</div></div>';
         } else {
             dom = '<div style="' + (this.vertical ? 'height' : 'width') + ':30000px;zoom:1;" id="' + this.id + 'wrap_box">' + ctn + '</div>'
         }
@@ -88,7 +88,7 @@ Youmi.UI.define("ScrollPic", {
             } else if (self.dotType) {
                 ret = self.dotType
             }
-            return ret
+            return ret;
         }
         if (this.dotId) {
             this.dot = this.$(this.dotId);
@@ -104,14 +104,14 @@ Youmi.UI.define("ScrollPic", {
                     return function() {
                         self.dotsMove(j)
                     }
-                })(j))
+                })(j));
             }
         }
         if (this.autoPlay) {
             clearInterval(this.playTimer);
             this.playTimer = setInterval(function() {
-                self.next()
-            }, this.playTime)
+                self.next();
+            }, this.playTime);
         }
         this.scrollType = this.vertical ? 'scrollTop' : 'scrollLeft';
         this.o[this.scrollType] = 0;
@@ -119,23 +119,23 @@ Youmi.UI.define("ScrollPic", {
         if (this.isTouch) {
             this.box.style[this.transition] = 'all ' + this.time + ' ease-out';
             this.addEvent(this.box, 'touchstart', function(e) {
-                self.touchstart(e)
+                self.touchstart(e);
             });
             this.addEvent(this.box, 'touchmove', function(e) {
-                self.touchmove(e)
+                self.touchmove(e);
             });
             this.addEvent(this.box, 'touchend', function(e) {
-                self.touchend(e)
-            })
+                self.touchend(e);
+            });
         }
         if (this.prevId) {
             this.btnPrev = this.$(this.prevId);
             this.addEvent(this.btnPrev, 'mousedown', function(e) {
                 self.prev();
                 if (e.preventDefault) {
-                    e.preventDefault()
+                    e.preventDefault();
                 };
-                return false
+                return false;
             })
         }
         if (this.nextId) {
@@ -143,41 +143,43 @@ Youmi.UI.define("ScrollPic", {
             this.addEvent(this.btnNext, 'mousedown', function(e) {
                 self.next();
                 if (e.preventDefault) {
-                    e.preventDefault()
+                    e.preventDefault();
                 }
-                return false
+                return false;
             });
         }
         this.addEvent(this.o, 'mouseover', function(e) {
             if (self.playTimer) {
-                clearInterval(self.playTimer)
+                clearInterval(self.playTimer);
             }
         });
         this.addEvent(this.o, 'mouseout', function(e) {
             if (self.playTimer) {
-                clearInterval(self.playTimer)
+                clearInterval(self.playTimer);
             };
             self.playTimer = setTimeout(function() {
-                self.next()
-            }, self.playTime)
+                self.next();
+            }, self.playTime);
         })
     },
+
     next: function() {
         var self = this;
         if (!this.isLoop && (this.index + this.unitNum > this.num)) {
             if (this.autoPlay && !window.event) {
-                this.moveTo(1)
+                this.moveTo(1);
             }
-            return
+            return;
         }
         if (!this.transition) {
             if (this.index > this.num) {
                 this.index = 1;
-                this.o[this.scrollType] = 0
+                this.o[this.scrollType] = 0;
             }
         }
-        this.moveTo(Math.floor(this.index) + 1)
+        this.moveTo(Math.floor(this.index) + 1);
     },
+
     prev: function() {
         var self = this;
         if (this.index == 1) {
@@ -194,41 +196,43 @@ Youmi.UI.define("ScrollPic", {
                     var pos = self.vertical ? '0,' + x : x + ',0';
                     self.box.style[self.transform] = 'translate(' + pos + ')';
                     self.index--;
-                    self.moveEnd()
-                }, 20)
+                    self.moveEnd();
+                }, 20);
             } else {
                 this.o[this.scrollType] = x;
-                this.moveTo(this.index - 1)
+                this.moveTo(this.index - 1);
             }
         } else {
-            this.moveTo(Math.ceil(this.index) - 1)
+            this.moveTo(Math.ceil(this.index) - 1);
         }
     },
+
     dotsMove: function(n) {
         if (!this.isLoop && (n + 1) * this.unitNum > this.num) {
-            n = this.num - this.unitNum
+            n = this.num - this.unitNum;
         } else {
-            n = n * this.unitNum
+            n = n * this.unitNum;
         }
-        this.moveTo(n + 1)
+        this.moveTo(n + 1);
     },
+
     moveTo: function(num) {
         var self = this;
         if (this.playTimer) {
-            clearInterval(this.playTimer)
+            clearInterval(this.playTimer);
         }
         var page = num - 1;
         if (page >= this.num) {
-            page = 0
+            page = 0;
         }
         if (page < 0) {
-            page = this.num - 1
+            page = this.num - 1;
         }
         if (this.dotId && this.dots) {
             for (var i = 0; i < this.dots.length; i++) {
                 this.dots[i].className = this.dots[i].className.replace(new RegExp(' ' + this.dotClassOn, 'gi'), '')
             }
-            this.dots[page].className += ' ' + this.dotClassOn
+            this.dots[page].className += ' ' + this.dotClassOn;
         }
         if (this.transition) {
             if (this.index > this.num) {
@@ -275,33 +279,35 @@ Youmi.UI.define("ScrollPic", {
             }, this.speed)
         }
     },
+
     touchstart: function(e) {
         if (e.touches.length !== 1) {
-            return
+            return;
         }
         if (this.isLoop) {
             if (this.index == 1) {
-                this.index += this.num
+                this.index += this.num;
             }
             if (this.index > this.num * 2 - 1) {
-                this.index -= this.num
+                this.index -= this.num;
             }
             var x = -(this.index - 1) * this.width + 'px';
             this.box.style[this.transition] = 'width 0s ease-out';
             var pos = this.vertical ? '0,' + x : x + ',0';
-            this.box.style[this.transform] = 'translate3d(' + pos + ',0)'
+            this.box.style[this.transform] = 'translate3d(' + pos + ',0)';
         }
         this.touchInitPos = this.vertical ? e.touches[0].pageY : e.touches[0].pageX;
         this.deltaX1 = this.touchInitPos;
-        this.startPos = -(this.index - 1) * this.width
+        this.startPos = -(this.index - 1) * this.width;
     },
+
     touchmove: function(e) {
         if (e.touches.length !== 1) {
-            return
+            return;
         }
         if (!this.isLoop && (this.index == 1 || this.index + this.unitNum > this.num) && Math.abs(this.deltaX2) > this.boxSize / 2) {
             e.preventDefault();
-            return
+            return;
         }
         var currentX = this.vertical ? e.touches[0].pageY : e.touches[0].pageX;
         this.deltaX2 = currentX - this.deltaX1;
@@ -310,72 +316,79 @@ Youmi.UI.define("ScrollPic", {
         this.box.style[this.transform] = 'translate3d(' + pos + ', 0)';
         this.startPos = this.totalDist;
         this.touchInitPos = currentX;
-        e.preventDefault()
+        e.preventDefault();
     },
+
     touchend: function(e) {
         if (this.deltaX2 < -30 && !(this.index + this.unitNum > this.num && !this.isLoop)) {
             this.next();
-            this.deltaX2 = 0
+            this.deltaX2 = 0;
         } else if (this.deltaX2 > 30 && !(this.index == 1 && !this.isLoop)) {
             this.prev();
-            this.deltaX2 = 0
+            this.deltaX2 = 0;
         } else {
-            this.restore()
+            this.restore();
         }
     },
+
     restore: function() {
         this.totalDist = this.startPos = this.startPos - this.deltaX2;
         var pos = this.vertical ? '0,' + this.totalDist + 'px' : this.totalDist + 'px,0';
         this.box.style[this.transform] = 'translate3d(' + pos + ', 0)';
-        this.deltaX2 = 0
+        this.deltaX2 = 0;
     },
+
     moveEnd: function() {
         var self = this;
         if (this.autoPlay) {
             clearInterval(this.playTimer);
             this.playTimer = setInterval(function() {
-                self.next()
-            }, this.playTime)
+                self.next();
+            }, this.playTime);
         }
         if (this.index >= 2 * this.num) {
-            this.index -= this.num
+            this.index -= this.num;
         }
         var page = Math.round((this.index - 1) * this.width / this.boxSize);
         if (this.index > this.num) {
-            page = this.index % this.num - 1
+            page = this.index % this.num - 1;
         }
         if (this.dotId && this.dots) {
             this.dots[this.page - 1].className = this.dots[this.page - 1].className.replace(new RegExp(this.dotClassOn, 'gi'), '');
-            this.dots[page].className += ' ' + this.dotClassOn
+            this.dots[page].className += ' ' + this.dotClassOn;
         }
         this.page = page + 1;
         if (typeof(this.onPageChange) === 'function') {
-            this.onPageChange()
+            this.onPageChange();
         }
     },
+
     $: function(o) {
-        return document.getElementById(o)
+        return document.getElementById(o);
     },
+
     getStyle: function(elm, style) {
-        return elm.currentStyle ? elm.currentStyle[style] : document.defaultView.getComputedStyle(elm, null)[style]
+        return elm.currentStyle ? elm.currentStyle[style] : document.defaultView.getComputedStyle(elm, null)[style];
     },
+
     getCSSName: function(name) {
         var cssName, parseEl = document.createElement('div');
         if (parseEl.style[name] !== undefined) {
-            cssName = name
+            cssName = name;
         } else {
             var a = ['Webkit', 'Moz'],
                 name_t = name.substr(0, 1).toUpperCase() + name.substr(1);
             for (var i = 0; i < a.length; i++) {
                 if (parseEl.style[(name = a[i] + name_t)] !== undefined) {
                     cssName = name;
-                    break
+                    break;
                 }
             }
         }
         return cssName;
     },
+
     addEvent: function(o, type, fn) {
-        o.attachEvent ? o.attachEvent('on' + type, fn) : o.addEventListener(type, fn, false)
+        o.attachEvent ? o.attachEvent('on' + type, fn) : o.addEventListener(type, fn, false);
     }
 });

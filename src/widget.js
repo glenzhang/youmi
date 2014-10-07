@@ -25,6 +25,8 @@
         protypes = protypes || {};
         // window[name] = new Youmi.Class(superclass);
         // window[name].include(protypes);
+
+        // syntactic sugar
         Youmi.UI.prop(name, new Youmi.Class(superclass), true).include(protypes);
     });
 
