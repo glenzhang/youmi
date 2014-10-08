@@ -45,7 +45,10 @@ var Youmi = window.Youmi || {
             klass.prototype = new subclass();
         }
 
-        klass.prototype.init = function() {};
+        if (!klass.prototype.init) {
+            klass.prototype.init = function () { };
+        }
+
         klass.fn = klass.prototype;
         klass.fn.parent = klass;
 

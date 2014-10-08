@@ -10,13 +10,17 @@
 
     Youmi.UI.Base.include({
 
-        eventNamespace: "YM",
+        eventElementsArr: [],
 
-        bindEventElement: [],
+        eventNamespace: ".FMUEVENT",
 
         destory: function() {
-            for (var i = 0, ee = this.bindEventElement, len = ee.length; i < len; ++i) {
-                ee[i].off && ee[i].off("." + this.eventNamespace);
+            // 遍历有事件的元素，然后off掉事件，释放内存
+            for (var i = 0, cachedElementsArr = this.eventElementsArr, len = cachedElementsArr.length; i < len; ++i) {
+                var currentItem = cachedElementsArr[i];
+                if (currentItem.off || (typeof jQuery !== "undefined" && currentItem instanceof jQuery)) {
+                    currentItem.off(this.eventNameSpace);
+                }
             }
         }
     });
@@ -27,9 +31,6 @@
         }
 
         protypes = protypes || {};
-
-        // window[name] = new Youmi.Class(superclass);
-        // window[name].include(protypes);
 
         // syntactic sugar
         Youmi.UI.prop(name, new Youmi.Class(superclass), true).include(protypes);
