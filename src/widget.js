@@ -14,7 +14,7 @@
 
         eventNamespace: ".FMUEVENT",
 
-        destory: function() {
+        destroy: function() {
             // 遍历有事件的元素，然后off掉事件，释放内存
             for (var i = 0, cachedElementsArr = this.eventElementsArr, len = cachedElementsArr.length; i < len; ++i) {
                 var currentItem = cachedElementsArr[i];
