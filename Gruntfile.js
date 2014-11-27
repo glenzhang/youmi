@@ -20,7 +20,7 @@ module.exports = function(grunt) {
         expand: true,
         cwd: 'js/', //待压缩目录
         src: ['**/*.js', '!**/*.min.js', '!**/full.js'], //过滤待压缩文件
-        dest: 'publish/js',
+        dest: 'dest/js',
         ext: '.min.js'
       }
     },
@@ -40,7 +40,7 @@ module.exports = function(grunt) {
         expand: true,
         cwd: 'css/',
         src: ['*.css','**/*.css', '!*.min.css', '!*.sprite.css'],
-        dest: 'publish/css',
+        dest: 'dest/css',
         ext: '.min.css'
       }
     },
@@ -50,12 +50,14 @@ module.exports = function(grunt) {
         options: {
           separator: ';'
         },
-        src: ['publish/**/*.min.js', '!publish/**/full.min.js'],
-        dest: 'publish/js/full.min.js'
+        src: ['dest/js/builtinextension.min.js', 
+          'dest/js/youmi.min.js', 'dest/js/utility.min.js', 'dest/js/regs.min.js', 
+          'dest/js/validation.min.js', 'dest/js/helper.min.js'],
+        dest: 'dest/js/full.min.js'
       },
       css: {
-          src: ['publish/**/*.min.css', '!publish/**/full.min.css'],
-        dest: 'publish/css/full.min.css'
+        src: ['dest/**/*.min.css', '!dest/**/full.min.css'],
+        dest: 'dest/css/full.min.css'
       }
     },
 
@@ -66,7 +68,7 @@ module.exports = function(grunt) {
         // 映射CSS中背景路径，支持函数和数组，默认为 null
         imagepath_map: null,
         // 雪碧图输出目录，注意，会覆盖之前文件！默认 images/
-        spritedest: 'publish/images/',
+        spritedest: 'dest/images/',
         // 替换后的背景路径，默认 ../images/
         spritepath: '../images/',
         // 各图片间间距，如果设置为奇数，会强制+1以保证生成的2x图片为偶数宽高，默认 0
@@ -98,7 +100,7 @@ module.exports = function(grunt) {
 
     clean: {
         build: {
-            src: ['.sass-cache/', 'publish/', 'css/*.sprited.css', 'css/*.sprite.css']
+            src: ['.sass-cache/', 'dest/', 'css/*.sprited.css', 'css/*.sprite.css']
         }
     },
 

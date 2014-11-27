@@ -2,6 +2,7 @@
   "name": "youmi",
   "version": "0.1.0",
   "description": "youmi is my favourite",
+  "repository": "https://github.com/glenzhang/youmi",
   "dependencies": {
     "grunt": "~0.4.5",
     "grunt-contrib-jshint": "~0.10.0",
